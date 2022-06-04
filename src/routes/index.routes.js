@@ -1,11 +1,13 @@
 const express = require('express');
-const { verifyApiKey } = require('../middlewares/security.middleware');
+const SecurityMiddleware = require('../middlewares/security.middleware');
 const { error } = require('../middlewares/error.middleware');
 
 const routes = express();
 
 routes.use(
-  verifyApiKey,
+  SecurityMiddleware.verifyApiKey,
+  require('./auth.routes'),
+  SecurityMiddleware.verifyToken,
   require('./user.routes'),
   error
 );

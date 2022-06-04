@@ -2,7 +2,7 @@ module.exports = convertToCamelCase = (data) => {
   Object.keys(data).forEach(key => {
     let value = data[key];
 
-    if (typeof data[key] === 'object') value = convertToCamelCase(value);
+    if (value && typeof value === 'object') value = convertToCamelCase(value);
 
     const camelKey = key.split('_').map((e, i) => {
       if (i === 0) return e;

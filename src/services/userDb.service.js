@@ -1,8 +1,16 @@
-const dbQuery = require('../config/pg');
+const bcrypt = require('bcryptjs');
 
-class DBService {
+const dbQuery = require('../config/pg');
+const { generateJWT } = require('../utils/jwt.util');
+
+
+
+class UserDBService {
   async createUser(data) {
     try {
+      const salt = bcrypt.genSaltSync();
+      data.password = bcrypt.hashSync(data.password, salt);
+
       await dbQuery(`SELECT * FROM create_user_fn($1::JSON) as query`, [data]);
     } catch (error) {
       throw error;
@@ -20,6 +28,8 @@ class DBService {
 
   async updateUser(data) {
     try {
+      const salt = bcrypt.genSaltSync();
+      data.password = bcrypt.hashSync(data.password, salt);
       await dbQuery(`SELECT * FROM update_user_fn($1::JSON) as query`, [data]);
     } catch (error) {
       throw error;
@@ -35,4 +45,4 @@ class DBService {
   }
 }
 
-module.exports = new DBService();
+module.exports = new UserDBService();

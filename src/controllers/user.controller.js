@@ -1,14 +1,14 @@
-const dbService = require("../services/db.service");
+const userDBService = require("../services/userDb.service");
 const camelConverter = require("../utils/camelConverter.util");
 
 class Controller {
   createUser = async (req, res) => {
     try {
-      await dbService.createUser(req.user);
+      await userDBService.createUser(req.user);
       res.status(200).json({
         status: true,
         message: "User created successfully",
-        data: req.user,	// req.user is set in the middleware      
+        data: null,
       });
     } catch (error) {
       res.status(500).json({
@@ -21,7 +21,7 @@ class Controller {
 
   getUser = async (req, res) => {
     try {
-      const dataAux = await dbService.getUser(req.user.id);
+      const dataAux = await userDBService.getUser(req.user.id);
 
       if (!dataAux)
         return res.status(200).json({
@@ -48,7 +48,7 @@ class Controller {
 
   updateUser = async (req, res) => {
     try {
-      await dbService.updateUser(req.user);
+      await userDBService.updateUser(req.user);
 
       res.status(200).json({
         status: true,
@@ -66,7 +66,7 @@ class Controller {
 
   deleteUser = async (req, res) => {
     try {
-      await dbService.deleteUser(req.user.id);
+      await userDBService.deleteUser(req.user.id);
 
       res.status(200).json({
         status: true,

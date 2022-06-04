@@ -8,6 +8,8 @@ class Validator {
     securityObj[`${server.apiKeyName}`] = Joi.string().required().valid(server.apiKeyValue);
     return Joi.object().keys({ ...securityObj }).options({ allowUnknown: true, stripUnknown: true });
   }
+
+  verifyToken = () => Joi.string().required();
 }
 
 module.exports = new Validator();

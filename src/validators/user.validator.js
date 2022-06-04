@@ -4,7 +4,7 @@ class Validator {
   createUser = () => {
     return Joi.object().keys({
       name: Joi.string().required(),
-      email: Joi.string().required(),
+      email: Joi.string().email().required(),
       password: Joi.string().required(),
       birthdate: Joi.date().optional(),
       address: Joi.string().optional(),
@@ -26,7 +26,7 @@ class Validator {
     return Joi.object().keys({
       id: Joi.number().required(),
       name: Joi.string().optional(),
-      email: Joi.string().optional(),
+      email: Joi.string().email().optional(),
       password: Joi.string().optional(),
       birthdate: Joi.date().optional(),
       address: Joi.string().optional(),

@@ -9,7 +9,9 @@ module.exports = {
     port: process.env.PORT,
     cors_allowed: process.env.CORS_ALLOWED,
     timeout: parseInt(process.env.SERVER_TIMEOUT),
-    extended: boolean(process.env.EXTENDED)
+    extended: boolean(process.env.EXTENDED),
+    secretKey: process.env.SECRET_KEY,
+    jwtExpiration: process.env.JWT_EXPIRATION,
   },
   dbConstants: {
     host: process.env.DBHOST,
