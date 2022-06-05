@@ -9,6 +9,7 @@ routes.use(
   require('./auth.routes'),
   SecurityMiddleware.verifyToken,
   require('./user.routes'),
+  require('./permission.routes'),
   error
 );
 
